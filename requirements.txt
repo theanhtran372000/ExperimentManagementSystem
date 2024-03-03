@@ -1,0 +1,4 @@
+loguru
+Flask
+flask_cors
+PyYAML
