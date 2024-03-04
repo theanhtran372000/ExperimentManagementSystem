@@ -1,0 +1,30 @@
+# Sample config for 1 experiment
+model:
+  layers:
+    - name: linear
+      in_shape: 784
+      out_shape: 128
+      act_func: relu
+
+    - name: linear
+      in_shape: 128
+      out_shape: 64
+      act_func: relu
+      
+    - name: linear
+      in_shape: 64
+      out_shape: 10
+      act_func: softmax
+
+train:
+  lr: 0.01 
+  batch_size: 64
+  num_epochs: 10
+  loss: CE
+  optim: GD
+  log_every: 100
+
+data:
+  dir: ../data
+  transforms:
+    - name: to_tensor
