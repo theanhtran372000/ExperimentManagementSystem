@@ -2,3 +2,4 @@ loguru
 Flask
 flask_cors
 PyYAML
+scikit-learn

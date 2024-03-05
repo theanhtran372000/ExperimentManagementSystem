@@ -1,27 +1,40 @@
 # Sample config for 1 experiment
 model:
   layers:
+    - name: flatten
+
     - name: linear
       in_shape: 784
       out_shape: 128
-      act_func: relu
+
+    - name: dropout
+      prob: 0.5
+
+    - name: leaky_relu
+      slope: 0.01
 
     - name: linear
       in_shape: 128
       out_shape: 64
-      act_func: relu
-      
+
+    - name: dropout
+      prob: 0.5
+
+    - name: elu
+      alpha: 0.8
+
     - name: linear
       in_shape: 64
       out_shape: 10
-      act_func: softmax
+
+    - name: log_softmax
 
 train:
-  lr: 0.01 
+  lr: 0.01
   batch_size: 64
-  num_epochs: 10
-  loss: CE
-  optim: GD
+  num_epochs: 2
+  loss: cross_entropy
+  optim: rmsprop
   log_every: 100
 
 data:
