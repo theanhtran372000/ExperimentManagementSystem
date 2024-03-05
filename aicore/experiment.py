@@ -18,6 +18,7 @@ class Experiment:
         logger.info('Building model...')
         start = time.time()
         self.model = ConfiguredModel(self.configs['model'])
+        self.model.is_valid()
         logger.success('Done after {:.2f}s!'.format(time.time() - start))
         
         # Build trainer
@@ -51,9 +52,7 @@ class Experiment:
         self.trainer.eval()
         logger.success('Done after {:.2f}s!'.format(time.time() - start))
         
-        # TODO: Log and save process
-        
         
 if __name__ == '__main__':
-    exp = Experiment(exp_config_path='../configs/experiments/linear_configs.default.yaml')
+    exp = Experiment(exp_config_path='../configs/experiments/configs.default.yaml')
     exp.start()
