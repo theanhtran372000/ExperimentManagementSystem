@@ -27,14 +27,14 @@ model:
       in_shape: 64
       out_shape: 10
 
-    - name: log_softmax
+    - name: relu
 
 train:
   lr: 0.01
   batch_size: 64
   num_epochs: 2
   loss: cross_entropy
-  optim: rmsprop
+  optim: adam
   log_every: 100
 
 data:

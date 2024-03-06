@@ -3,8 +3,8 @@ import yaml
 import pprint
 from loguru import logger
 
-from model import ConfiguredModel
-from trainer import Trainer
+from .model import ConfiguredModel
+from .trainer import Trainer
 
 
 class Experiment:
@@ -47,9 +47,14 @@ class Experiment:
         logger.success('Done after {:.2f}s!'.format(time.time() - start))
     
         # Evaluate model
-        logger.info('Start evaluating...')
+        logger.info('Start evaluating on train set')
         start = time.time()
-        self.trainer.eval()
+        self.trainer.eval(train=True)
+        logger.success('Done after {:.2f}s!'.format(time.time() - start))
+        
+        logger.info('Start evaluating on valid set')
+        start = time.time()
+        self.trainer.eval(train=False)
         logger.success('Done after {:.2f}s!'.format(time.time() - start))
         
         

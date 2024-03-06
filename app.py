@@ -5,6 +5,8 @@ from flask import Flask, request, make_response, render_template, redirect
 from flask_cors import CORS
 
 import routes
+import aicore
+
 
 # Flask app
 app = Flask(
@@ -29,8 +31,13 @@ def main():
     )) 
     
     # Config routes
+    logger.info('Configuring routes')
     routes.configure(configs)
     app.register_blueprint(routes.module, url_prefix='/')
+    
+    # Config aicore
+    logger.info('Seeding AI Core at {}'.format(configs['aicore']['seed']))
+    aicore.seed(configs['aicore']['seed'])
     
     ### === Flask Server === ###
     # Run server

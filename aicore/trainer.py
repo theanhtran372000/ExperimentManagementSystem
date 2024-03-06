@@ -50,9 +50,9 @@ class Trainer:
                 
                 # Forward pass
                 outputs = self.model(images)
-                # labels = F.one_hot(labels, num_classes=10).float()
+                labels_onehot = F.one_hot(labels, num_classes=10).float()
                 
-                loss = self.loss(outputs, labels)
+                loss = self.loss(outputs, labels_onehot)
                 total_loss += loss * images.shape[0]
                 
                 # Save checkpoint, update min loss
@@ -80,7 +80,7 @@ class Trainer:
     
     
     # Evaluating function                 
-    def eval(self):
+    def eval(self, train=False):
         
         # Load best checkpoint
         self.load_checkpoint()
@@ -93,7 +93,7 @@ class Trainer:
             true_labels = []
             predicted_labels = []
 
-            for images, labels in self.valid_loader:
+            for images, labels in self.train_loader if train else self.valid_loader:
                 outputs = self.model(images)
                 _, predicted = torch.max(outputs.data, 1)
                 total += labels.size(0)
@@ -106,6 +106,7 @@ class Trainer:
             precision = precision_score(true_labels, predicted_labels, average='macro', zero_division=0.0)
             recall = recall_score(true_labels, predicted_labels, average='macro', zero_division=0.0)
 
+            logger.info('=== RESULT ON {} SET ==='.format('TRAIN' if train else 'VALID'))
             logger.info('Accuracy: {:.2f}%'.format(accuracy * 100))
             logger.info('Precision: {:.2f}%'.format(precision * 100))
             logger.info('Recall: {:.2f}%'.format(recall * 100))
@@ -160,12 +161,11 @@ class Trainer:
         if self.train_configs['loss'] == 'cross_entropy':
             return nn.CrossEntropyLoss()
         
-        # TODO: Need to custom MSE and Smooth L1 Loss
-        # elif self.train_configs['loss'] == 'mse':
-        #     return nn.MSELoss()
+        elif self.train_configs['loss'] == 'mse':
+            return nn.MSELoss()
         
-        # elif self.train_configs['loss'] == 'smooth_l1':
-        #     return nn.SmoothL1Loss()
+        elif self.train_configs['loss'] == 'smooth_l1':
+            return nn.SmoothL1Loss()
         
         else:
             logger.error('Loss "{}" is under development.'.format(self.train_configs['loss']))
