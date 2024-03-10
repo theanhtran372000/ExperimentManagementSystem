@@ -34,6 +34,8 @@ def experiment_create():
         ), 400
     
     exp_configs = request.get_json()
+    if 'data' not in exp_configs:
+        exp_configs['data'] = {}
     exp_configs['data']['dir'] = configs['data']['dir']
     logger.info('[Experiment][Create] Recieve request')
     
@@ -99,15 +101,15 @@ def experiment_list():
     else:
         pathlib.Path(configs['exp']['dir']).mkdir(parents=True, exist_ok=True)
         exp_ids = []
-    logger.success('[Experiment][List] List: {}'.format(exp_ids))
     
     data = {}
     for exp_id in exp_ids:
         status_path = os.path.join(configs['exp']['dir'], exp_id, 'status.yaml')
         
         with open(status_path, 'r') as f:
-            status = yaml.full_load(status_path)
+            status = yaml.full_load(f)
         data[exp_id] = status
+    logger.success('[Experiment][List] List: {}'.format(exp_ids))
     
     return generate_response(
         data=data,

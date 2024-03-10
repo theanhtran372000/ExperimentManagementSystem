@@ -8,6 +8,7 @@ from utils.common import *
 class StatusManager:
     def __init__(self, exp_dir):
         self.exp_dir = exp_dir
+        self.exp_id = os.path.basename(self.exp_dir)
         self.status_path = os.path.join(self.exp_dir, 'status.yaml')
         
         pathlib.Path(self.exp_dir).mkdir(parents=True, exist_ok=True)
@@ -32,6 +33,7 @@ class StatusManager:
     def create(self):
         
         data = {}
+        data['id'] = self.exp_id
         data['run'] = {}
         data['run']['status'] = 'create'
         data['run']['create'] = get_current_timestring()
