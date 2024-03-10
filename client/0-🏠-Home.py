@@ -41,6 +41,7 @@ st.markdown('''<style>
     div[data-testid="stMetricDelta"] > div {
         font-size: 14px;
         font-weight: 600;
+        color: #70ae3b;
     }
     
     div[data-testid="stMetricValue"] > div {

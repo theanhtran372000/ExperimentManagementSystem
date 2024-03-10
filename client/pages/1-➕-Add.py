@@ -254,7 +254,7 @@ for transform in transforms:
     })
 st.session_state['transforms'] = processed_transforms
 
-st.sidebar.subheader('Control Panel')
+st.sidebar.header('Control Panel')
 
 id_display = st.sidebar.markdown('Current id: **none**')
 annouce = st.sidebar.info('Here is some announcements.', icon='ℹ️')
@@ -263,7 +263,10 @@ button_cols = st.sidebar.columns(2)
 create_button = button_cols[0].button('Create', key='create_button')
 if create_button:
     
-    if 'layers' not in st.session_state:
+    if 'layers' not in st.session_state or \
+        any([
+            not bool(layer) for layer in st.session_state['layers']
+        ]):
         annouce.error("Your model can't be empty!", icon='🚨')
         
     else:
