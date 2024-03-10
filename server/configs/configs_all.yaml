@@ -10,3 +10,4 @@ exp:
   dir: save/exps
   seed: 2024
   name_len: 12
+  log_every: 100

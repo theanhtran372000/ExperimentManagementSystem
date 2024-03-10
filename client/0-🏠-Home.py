@@ -12,6 +12,8 @@ with open('configs.yaml',  'r') as f:
     configs = yaml.full_load(f)
 logger.info('Configs: {}'.format(pprint.pformat(configs)))
 
+sender = RequestSender(configs)
+
 # Configure wide screen mode
 st.set_page_config(layout="wide")
 
@@ -48,16 +50,11 @@ st.markdown('''<style>
     
 </style>''', unsafe_allow_html=True)
 
-# Sidebar config
-with st.sidebar:
-    st.header('Configuration')
-
 # Main page
-st.subheader('Welcome to Experiment Management System!')
+st.header('Welcome to Experiment Management System!')
 st.caption('By The Anh Tran')
 
 # Fetch data from server
-sender = RequestSender(configs)
 response = sender.experiment_list()
 
 # Display result

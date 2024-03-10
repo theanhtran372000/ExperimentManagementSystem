@@ -35,7 +35,6 @@ train:
   num_epochs: 2
   loss: cross_entropy
   optim: adam
-  log_every: 100
 
 data:
   dir: ../data

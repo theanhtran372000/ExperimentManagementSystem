@@ -37,6 +37,9 @@ def experiment_create():
     if 'data' not in exp_configs:
         exp_configs['data'] = {}
     exp_configs['data']['dir'] = configs['data']['dir']
+    if 'train' not in exp_configs:
+        exp_configs['train'] = {}
+    exp_configs['train']['log_every'] = configs['exp']['log_every']
     logger.info('[Experiment][Create] Recieve request')
     
     # Verify duplication
