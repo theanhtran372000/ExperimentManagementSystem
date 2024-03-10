@@ -101,10 +101,16 @@ def experiment_list():
         exp_ids = []
     logger.success('[Experiment][List] List: {}'.format(exp_ids))
     
+    data = {}
+    for exp_id in exp_ids:
+        status_path = os.path.join(configs['exp']['dir'], exp_id, 'status.yaml')
+        
+        with open(status_path, 'r') as f:
+            status = yaml.full_load(status_path)
+        data[exp_id] = status
+    
     return generate_response(
-        data={
-            "ids": exp_ids
-        },
+        data=data,
         success=True,
         message='List experiment success!'
     ), 200
@@ -224,42 +230,6 @@ def experiment_start():
         ), 200      
 
 
-@module.route('/status', methods=['POST'])
-def experiment_status():
-    
-    logger.info('[Experiment][Status] Recieve request')
-    # Extract configs from request
-    if not request.is_json:
-        return generate_response(
-            data=None,
-            success=False,
-            message='Data format must be JSON!'
-        ), 400
-    
-    exp_id = request.get_json()['id']
-    
-    if not exp_exists(exp_id, configs['exp']['dir']):
-        
-        logger.info('[Experiment][Status] Id not exists')
-        return generate_response(
-            data=None,
-            success=False,
-            message='Experiment ID not found!'
-        ), 400
-        
-    else:
-        exp_dir = os.path.join(configs['exp']['dir'], exp_id)
-        status = StatusManager(exp_dir)
-        data = status.read()
-        
-        logger.success('[Experiment][Status] Get experiment {} status success'.format(exp_id))
-        return generate_response(
-            data=data,
-            message='Get status success',
-            success=True
-        )
-
-
 @module.route('/info', methods=['POST'])
 def experiment_info():
     
@@ -294,9 +264,14 @@ def experiment_info():
         with open(os.path.join(exp_dir, 'configs.yaml'), 'r') as f:
             exp_config = yaml.full_load(f)
 
+        # Read status 
+        with open(os.path.join(exp_dir, 'status.yaml'), 'r') as f:
+            exp_status = yaml.full_load(f)
+        
         data = {
             'model': model_log,
-            'config': exp_config
+            'config': exp_config,
+            'status': exp_status
         }
     
         logger.success('[Experiment][Info] Get experiment {} info success'.format(exp_id))

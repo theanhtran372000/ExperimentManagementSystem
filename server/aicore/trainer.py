@@ -52,7 +52,7 @@ class Trainer:
         
         for epoch in range(self.train_configs['num_epochs']):
             
-            self.status.update(epoch, self.min_loss.item())
+            self.status.update(epoch + 1, self.min_loss.item())
             
             total_loss = 0.0
             for i, (images, labels) in enumerate(self.train_loader):
