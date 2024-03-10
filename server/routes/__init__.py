@@ -41,12 +41,3 @@ def before_request():
 @module.route('/ping', methods=['GET'])
 def ping():
     return 'PONG'
-
-# Default route
-@module.route('/')
-def redirect_to_home():
-    return redirect('/home')
-
-@module.route('/home', methods=['GET'])
-def home():
-    return render_template('home.html')
