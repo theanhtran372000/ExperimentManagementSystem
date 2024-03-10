@@ -7,7 +7,7 @@ from loguru import logger
 from flask import Blueprint, request
 
 from .utils import *
-from aicore import Experiment
+from aicore import *
 from utils.request import generate_response
 from utils.common import generate_random_string
 
@@ -136,8 +136,20 @@ def experiment_delete():
         ), 400
         
     else:
+        exp_dir = os.path.join(configs['exp']['dir'])
+        status = StatusManager(exp_dir)
+        
+        # Check current status
+        if status() not in ['create', 'done']:
+            logger.error('[Experiment][Delete] Experiment {} is currently running'.format(exp_id))
+            return generate_response(
+                data=None,
+                success=False,
+                message='Experiment {} is currently running'.format(exp_id)
+            ), 400
+        
         shutil.rmtree(os.path.join(configs['exp']['dir'], exp_id))
-        logger.info('[Experiment][Delete] Delete Id {}'.format(exp_id))
+        logger.success('[Experiment][Delete] Experiment {} deleted'.format(exp_id))
         
         return generate_response(
             data={
@@ -204,6 +216,7 @@ def experiment_start():
             exp.start()
         threading.Thread(target=start_thread).start()
         
+        logger.success('[Experiment][Start] Experiment {} started'.format(exp_id))
         return generate_response(
             data=None,
             success=True,
@@ -213,29 +226,82 @@ def experiment_start():
 
 @module.route('/status', methods=['POST'])
 def experiment_status():
-    # TODO: Finish this API
-    return 'experiment_status'
-
-
-@module.route('/restart', methods=['POST'])
-def experiment_restart():
-    # TODO: Finish this API
-    return 'experiment_restart'
+    
+    logger.info('[Experiment][Status] Recieve request')
+    # Extract configs from request
+    if not request.is_json:
+        return generate_response(
+            data=None,
+            success=False,
+            message='Data format must be JSON!'
+        ), 400
+    
+    exp_id = request.get_json()['id']
+    
+    if not exp_exists(exp_id, configs['exp']['dir']):
+        
+        logger.info('[Experiment][Status] Id not exists')
+        return generate_response(
+            data=None,
+            success=False,
+            message='Experiment ID not found!'
+        ), 400
+        
+    else:
+        exp_dir = os.path.join(configs['exp']['dir'], exp_id)
+        status = StatusManager(exp_dir)
+        data = status.read()
+        
+        logger.success('[Experiment][Status] Get experiment {} status success'.format(exp_id))
+        return generate_response(
+            data=data,
+            message='Get status success',
+            success=True
+        )
 
 
 @module.route('/info', methods=['POST'])
 def experiment_info():
-    # TODO: Finish this API
-    return 'experiment_info'
+    
+    logger.info('[Experiment][Info] Recieve request')
+    # Extract configs from request
+    if not request.is_json:
+        return generate_response(
+            data=None,
+            success=False,
+            message='Data format must be JSON!'
+        ), 400
+    
+    exp_id = request.get_json()['id']
+    
+    if not exp_exists(exp_id, configs['exp']['dir']):
+        
+        logger.info('[Experiment][Info] Id not exists')
+        return generate_response(
+            data=None,
+            success=False,
+            message='Experiment ID not found!'
+        ), 400
+        
+    else:
+        exp_dir = os.path.join(configs['exp']['dir'], exp_id)
+        
+        # Read model log
+        with open(os.path.join(exp_dir, 'model.log'), 'r') as f:
+            model_log = f.read()
+            
+        # Read model config
+        with open(os.path.join(exp_dir, 'configs.yaml'), 'r') as f:
+            exp_config = yaml.full_load(f)
 
-
-@module.route('/filter', methods=['GET'])
-def experiment_filter():
-    # TODO: Finish this API
-    return 'experiment_filter'
-
-
-@module.route('/exist', methods=['GET'])
-def experiment_exist():
-    # TODO: Finish this API
-    return 'experiment_exist'
+        data = {
+            'model': model_log,
+            'config': exp_config
+        }
+    
+        logger.success('[Experiment][Info] Get experiment {} info success'.format(exp_id))
+        return generate_response(
+            data=data,
+            success=True,
+            message='Get info success'
+        )

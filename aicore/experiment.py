@@ -27,6 +27,8 @@ class Experiment:
         logger.info('Building model...')
         start = time.time()
         self.model = ConfiguredModel(self.configs['model'])
+        with open(os.path.join(self.exp_dir, 'model.log'), 'w') as f:
+            f.write(str(self.model))
         
         if not self.model.is_valid():
             raise Exception('Invalid model structure')
