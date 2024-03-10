@@ -9,7 +9,7 @@ from flask import Blueprint, request
 from .utils import *
 from aicore import Experiment
 from utils.request import generate_response
-from utils.random import generate_random_string
+from utils.common import generate_random_string
 
 module = Blueprint('exp', __name__)
 
@@ -66,8 +66,9 @@ def experiment_create():
     
     # Verify configuration
     try:
-        _ = Experiment(exp_dir)
+        exp = Experiment(exp_dir)
         logger.success('[Experiment][Create] Experiment {} is valid'.format(exp_id))
+        exp.status.create()
         
         return generate_response(
             data={
@@ -160,7 +161,6 @@ def experiment_start():
             message='Data format must be JSON!'
         ), 400
     
-    
     exp_id = request.get_json()['id']
     
     if not exp_exists(exp_id, configs['exp']['dir']):
@@ -178,7 +178,13 @@ def experiment_start():
         exp = Experiment(exp_dir)
         
         # Check current status
-        # TODO:
+        if exp.status() not in ['create', 'done']:
+            logger.error('[Experiment][Start] Experiment {} is currently running'.format(exp_id))
+            return generate_response(
+                data=None,
+                success=False,
+                message='Experiment {} is currently running'.format(exp_id)
+            ), 400
         
         # Try to start experiment
         try:
@@ -202,10 +208,7 @@ def experiment_start():
             data=None,
             success=True,
             message='Experiment {} started!'.format(exp_id)
-        ), 200
-        
-            
-        
+        ), 200      
 
 
 @module.route('/status', methods=['POST'])
@@ -213,11 +216,6 @@ def experiment_status():
     # TODO: Finish this API
     return 'experiment_status'
 
-
-@module.route('/stop', methods=['POST'])
-def experiment_stop():
-    # TODO: Finish this API
-    return 'experiment_stop'
 
 @module.route('/restart', methods=['POST'])
 def experiment_restart():

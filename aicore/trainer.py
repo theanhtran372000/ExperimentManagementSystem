@@ -11,13 +11,15 @@ from torchvision import datasets, transforms
 
 
 class Trainer:
-    def __init__(self, model, data_configs, train_configs, save_dir):
+    def __init__(self, exp):
        
-       self.model = model
-       self.data_configs = data_configs
-       self.train_configs = train_configs
-       self.save_dir = save_dir
-       self.exp_id = os.path.basename(self.save_dir)
+       self.exp = exp
+       self.model = self.exp.model
+       self.data_configs = self.exp.configs['data']
+       self.train_configs = self.exp.configs['train']
+       self.save_dir = self.exp.exp_dir
+       self.exp_id = self.exp.exp_id
+       self.status = self.exp.status
        
        # Build transforms
        self.transforms = self.prepare_transforms()
@@ -42,13 +44,15 @@ class Trainer:
     
     # Training function
     def train(self):
-        
+
         self.init()
         
-        self.min_loss = 999
+        self.min_loss = torch.Tensor([999.0])
         total_step = len(self.train_loader)
         
         for epoch in range(self.train_configs['num_epochs']):
+            
+            self.status.update(epoch, self.min_loss.item())
             
             total_loss = 0.0
             for i, (images, labels) in enumerate(self.train_loader):
@@ -79,10 +83,10 @@ class Trainer:
             if avg_loss < self.min_loss:
                 logger.info('Epoch [{}/{}], Loss update: {:.4f} -> {:.4f}'.format(
                     epoch + 1, self.train_configs['num_epochs'], 
-                    self.min_loss, avg_loss
+                    self.min_loss.item(), avg_loss
                 ))
                 self.min_loss = avg_loss
-                self.save_checkpoint()       
+                self.save_checkpoint()   
     
     
     # Test training function
@@ -122,6 +126,8 @@ class Trainer:
     # Evaluating function                 
     def eval(self, train=False):
         
+        result = {}
+        
         # Load best checkpoint
         self.load_checkpoint()
         self.model.eval()
@@ -142,15 +148,38 @@ class Trainer:
                 true_labels.extend(labels.tolist())
                 predicted_labels.extend(predicted.tolist())
 
+            # Accuracy
             accuracy = correct / total
-            precision = precision_score(true_labels, predicted_labels, average='macro', zero_division=0.0)
-            recall = recall_score(true_labels, predicted_labels, average='macro', zero_division=0.0)
-
+            result['accuracy'] = accuracy
+            
+            # Precision
+            precision_micro = precision_score(true_labels, predicted_labels, average='micro', zero_division=0.0)
+            precision_macro = precision_score(true_labels, predicted_labels, average='macro', zero_division=0.0)
+            result['precision'] = {
+                'micro': precision_micro.item(),
+                'macro': precision_macro.item()
+            }
+            
+            #  Recall
+            recall_micro = recall_score(true_labels, predicted_labels, average='micro', zero_division=0.0)
+            recall_macro = recall_score(true_labels, predicted_labels, average='macro', zero_division=0.0)
+            result['recall'] = {
+                'micro': recall_micro.item(),
+                'macro': recall_macro.item()
+            }
+            
             logger.info('=== RESULT ON {} SET ==='.format('TRAIN' if train else 'VALID'))
             logger.info('Accuracy: {:.2f}%'.format(accuracy * 100))
-            logger.info('Precision: {:.2f}%'.format(precision * 100))
-            logger.info('Recall: {:.2f}%'.format(recall * 100))
-    
+            logger.info('Precision: (Micro) {:.2f}% - (Macro) {:.2f}%'.format(
+                precision_micro * 100,
+                precision_macro * 100
+            ))
+            logger.info('Recall: (Micro) {:.2f}% - (Macro) {:.2f}%'.format(
+                recall_micro * 100,
+                recall_macro * 100
+            ))
+
+            return result
     
     # Save and load checkpoint function
     def save_checkpoint(self):

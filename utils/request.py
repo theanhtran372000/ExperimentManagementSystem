@@ -1,11 +1,11 @@
-from datetime import datetime
+from .common import get_current_timestring
+
 
 # Content as a dictionary
 def generate_response(data, message=None, success=True):
     
     # Get current time
-    current_time = datetime.now()
-    time_string = current_time.strftime('%Y-%m-%d %H:%M:%S')
+    time_string = get_current_timestring()
     
     return {
         'timestamp': time_string,

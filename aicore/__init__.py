@@ -3,6 +3,7 @@ import numpy as np
 import torch
 
 from .experiment import *
+from .manage import *
 
 def seed(random_seed):
     # Fix the random seed for the random module

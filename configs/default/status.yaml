@@ -1,0 +1,26 @@
+run:
+  status: create # or train/eval/done
+  create: '2024-03-10 04:16:12'
+  start: '2024-03-10 04:16:12'  # Have when start running
+  end: '2024-03-10 04:29:12'    # Have when done  
+  dur: 123                      # secs
+  curr_epoch: 12
+  best_loss: 0.12
+
+result:
+  train:
+    accuracy: 0.92
+    precision: 
+      macro: 0.93
+      micro: 0.92
+    recall:
+      macro: 0.93
+      micro: 0.92
+  valid:
+    accuracy: 0.92
+    precision: 
+      macro: 0.93
+      micro: 0.92
+    recall:
+      macro: 0.93
+      micro: 0.92
