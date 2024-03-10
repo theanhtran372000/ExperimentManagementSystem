@@ -1,6 +1,6 @@
 from flask import Blueprint, request, make_response, \
     redirect, render_template
-from . import api # Submodules
+from . import exp # Submodules
 
 
 module = Blueprint('root', __name__)
@@ -15,10 +15,10 @@ def configure(_configs):
     configs = _configs
     
     # Config submodules
-    api.configure(configs)
+    exp.configure(configs)
 
 # Register submodules
-module.register_blueprint(api.module, url_prefix='/api')
+module.register_blueprint(exp.module, url_prefix='/exp')
 
 
 # Preflight requests

@@ -26,7 +26,7 @@ class ConfiguredModel(nn.Module):
 
     def build_network(self):
         layer_list = []
-        for i, layer in enumerate(self.model_configs['layers']):
+        for layer in self.model_configs['layers']:
             
             # Linear layer
             if layer['name'] == 'linear':

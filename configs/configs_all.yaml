@@ -3,5 +3,10 @@ app:
   port: 5000
   multithread: True
 
-aicore:
+data:
+  dir: 'data'
+
+exp:
+  dir: save/exps
   seed: 2024
+  name_len: 12

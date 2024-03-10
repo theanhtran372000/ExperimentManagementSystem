@@ -1,3 +1,4 @@
+import os
 from loguru import logger
 from sklearn.metrics import precision_score, recall_score
 
@@ -10,11 +11,13 @@ from torchvision import datasets, transforms
 
 
 class Trainer:
-    def __init__(self, model, data_configs, train_configs):
+    def __init__(self, model, data_configs, train_configs, save_dir):
        
        self.model = model
        self.data_configs = data_configs
        self.train_configs = train_configs
+       self.save_dir = save_dir
+       self.exp_id = os.path.basename(self.save_dir)
        
        # Build transforms
        self.transforms = self.prepare_transforms()
@@ -40,6 +43,8 @@ class Trainer:
     # Training function
     def train(self):
         
+        self.init()
+        
         self.min_loss = 999
         total_step = len(self.train_loader)
         
@@ -58,8 +63,9 @@ class Trainer:
                 # Save checkpoint, update min loss
                 if (i+1) % self.train_configs['log_every'] == 0:
                     
-                    logger.info('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'.format(
-                        epoch + 1, self.train_configs['num_epochs'], 
+                    logger.info('[{}] Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'.format(
+                        self.exp_id, epoch + 1, 
+                        self.train_configs['num_epochs'], 
                         i+1, total_step, loss.item()
                     ))
                     
@@ -77,6 +83,40 @@ class Trainer:
                 ))
                 self.min_loss = avg_loss
                 self.save_checkpoint()       
+    
+    
+    # Test training function
+    def try_train(self):
+        
+        self.init()
+        
+        batch_size  = 32
+        image_shape = (1, 28, 28) # (channel, height, width)
+        n_classes   = 10
+        
+        # Create fake input data
+        images = torch.randn(batch_size, *image_shape)
+        labels = torch.randint(0, n_classes, (batch_size,))
+
+        # Forward
+        outputs = self.model(images)
+        labels_onehot = F.one_hot(labels, num_classes=10).float()
+        loss = self.loss(outputs, labels_onehot)
+        
+        # Backward and optimize
+        self.optim.zero_grad()
+        loss.backward()
+        self.optim.step()
+    
+    
+    # Init model
+    def init(self):
+        def init_weights(m):
+            if isinstance(m, nn.Linear):
+                torch.nn.init.xavier_uniform(m.weight)
+                m.bias.data.fill_(0.01)
+
+        self.model.apply(init_weights)
     
     
     # Evaluating function                 
@@ -114,10 +154,10 @@ class Trainer:
     
     # Save and load checkpoint function
     def save_checkpoint(self):
-        torch.save(self.model.state_dict(), 'best_ckpt.pth')
+        torch.save(self.model.state_dict(), os.path.join(self.save_dir, 'best.pth'))
     
     def load_checkpoint(self):
-        self.model.load_state_dict(torch.load('best_ckpt.pth'))
+        self.model.load_state_dict(torch.load(os.path.join(self.save_dir, 'best.pth')))
     
     
     # Prepare transform stack

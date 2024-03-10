@@ -1,6 +1,8 @@
+import os
 import time
 import yaml
 import pprint
+import pathlib
 from loguru import logger
 
 from .model import ConfiguredModel
@@ -8,9 +10,14 @@ from .trainer import Trainer
 
 
 class Experiment:
-    def __init__(self, exp_config_path):
+    def __init__(self, exp_dir):
+        
+        self.exp_dir = exp_dir
+        self.exp_id = os.path.basename(self.exp_dir)
+        pathlib.Path(self.exp_dir).mkdir(parents=True, exist_ok=True)
+        
         # Configs
-        self.exp_config_path = exp_config_path
+        self.exp_config_path = os.path.join(self.exp_dir, 'configs.yaml')
         self.load_configs()
         logger.info('Experiment configs: \n{}'.format(pprint.pformat(self.configs)))
         
@@ -18,7 +25,9 @@ class Experiment:
         logger.info('Building model...')
         start = time.time()
         self.model = ConfiguredModel(self.configs['model'])
-        self.model.is_valid()
+        
+        if not self.model.is_valid():
+            raise Exception('Invalid model structure')
         logger.success('Done after {:.2f}s!'.format(time.time() - start))
         
         # Build trainer
@@ -27,7 +36,8 @@ class Experiment:
         self.trainer = Trainer(
             self.model,
             self.configs['data'],
-            self.configs['train']
+            self.configs['train'],
+            self.exp_dir
         )
         logger.success('Done after {:.2f}s!'.format(time.time() - start))
     
@@ -56,8 +66,11 @@ class Experiment:
         start = time.time()
         self.trainer.eval(train=False)
         logger.success('Done after {:.2f}s!'.format(time.time() - start))
-        
+    
+    # Try the whole training process
+    def try_start(self):
+        self.trainer.try_train()
         
 if __name__ == '__main__':
-    exp = Experiment(exp_config_path='../configs/experiments/configs.default.yaml')
+    exp = Experiment(exp_dir='../save/exps/q0k5ozji3ro0')
     exp.start()

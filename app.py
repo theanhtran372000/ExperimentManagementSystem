@@ -1,7 +1,8 @@
 import yaml
 import pprint
+import pathlib
 from loguru import logger
-from flask import Flask, request, make_response, render_template, redirect
+from flask import Flask
 from flask_cors import CORS
 
 import routes
@@ -35,9 +36,10 @@ def main():
     routes.configure(configs)
     app.register_blueprint(routes.module, url_prefix='/')
     
-    # Config aicore
-    logger.info('Seeding AI Core at {}'.format(configs['aicore']['seed']))
-    aicore.seed(configs['aicore']['seed'])
+    # Prepare experiment
+    logger.info('Seeding AI Core at {}'.format(configs['exp']['seed']))
+    aicore.seed(configs['exp']['seed'])
+    pathlib.Path(configs['exp']['dir']).mkdir(parents=True, exist_ok=True)
     
     ### === Flask Server === ###
     # Run server
