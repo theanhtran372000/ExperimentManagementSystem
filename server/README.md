@@ -13,6 +13,7 @@ source venv/bin/activate  # or .\venv\Scripts\activate in Window
 ```
 python -m pip install -U pip setuptools
 pip install -r requirements.txt
+pip install torch==1.9.0+cpu torchvision==0.10.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
 ## 2. Docker deployment

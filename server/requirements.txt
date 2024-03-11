@@ -3,5 +3,3 @@ Flask
 flask_cors
 PyYAML
 scikit-learn
-torch
-torchvision

@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  server:
+    image: theanhtran/ems-server:v1.0.0
+    ports:
+      - 3270:3270/tcp
+
+  client:
+    image: theanhtran/ems-client:v1.0.0
+    environment:
+      - HOST=server:3720
+    ports:
+      - 80:80/tcp
+    depends_on:
+      - server

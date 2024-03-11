@@ -1,21 +1,16 @@
 import json
-import yaml
 import requests
 
 
 # Operate request to backend
 class RequestSender:
-    def __init__(self, configs):
-        self.configs = configs
+    def __init__(self, host):
+        self.host = host
     
     
     # Prepare endpoint
     def get_url(self, api):
-        return 'http://{}:{}{}'.format(
-            self.configs['server']['host'],
-            self.configs['server']['port'],
-            api
-        )
+        return 'http://{}{}'.format(self.host, api)
     
 
     # Create
@@ -118,10 +113,7 @@ class RequestSender:
         
 if __name__ == '__main__':
     
-    with open('../configs.yaml', 'r') as f:
-        configs = yaml.full_load(f)
-    
-    sender = RequestSender(configs)
+    sender = RequestSender('localhost:3720')
     data = sender.experiment_list()
     print(data)
     

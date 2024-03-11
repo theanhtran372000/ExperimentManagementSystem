@@ -1,19 +1,13 @@
-import yaml
+import os
 import time
-import pprint
 import streamlit as st
-from loguru import logger
 
-from utils.request import *
-from utils.exp import *
-from utils.progress import *
+from utils import *
+
 
 # Load configs
-with open('configs.yaml',  'r') as f:
-    configs = yaml.full_load(f)
-logger.info('Configs: {}'.format(pprint.pformat(configs)))
-
-sender = RequestSender(configs)
+host = os.environ.get('HOST')
+sender = RequestSender(host)
 
 # Configure wide screen mode
 st.set_page_config(layout="wide")
@@ -163,5 +157,5 @@ else:
     
     
 while True:
-    time.sleep(configs['progress']['reset_every'])
+    time.sleep(5)
     st.rerun()

@@ -1,17 +1,12 @@
-import yaml
-import pprint
+import os
 import streamlit as st
-from loguru import logger
 
-from utils.request import *
+from utils import *
+
 
 # Load configs
-with open('configs.yaml',  'r') as f:
-    configs = yaml.full_load(f)
-logger.info('Configs: {}'.format(pprint.pformat(configs)))
-
-sender = RequestSender(configs)
-
+host = os.environ.get('HOST')
+sender = RequestSender(host)
 
 # Configure wide screen mode
 st.set_page_config(layout="wide")
@@ -164,7 +159,6 @@ else:
                 cols[0].markdown('**[{}] Log Softmax layer**'.format(i))
                 
             else:
-                logger.error('Layer {} unsupported!'.format(layer['name']))
                 pass
 
 _cols = cols[0].columns(2)
