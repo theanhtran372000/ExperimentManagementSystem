@@ -1,0 +1,87 @@
+<mxfile host="Electron" modified="2024-03-11T09:35:29.179Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="EdwGqRrsBu98p4Mfhrzg" version="23.1.5" type="device">
+  <diagram name="Page-1" id="v7rnaYGyf1lbcz_4oU8b">
+    <mxGraphModel dx="890" dy="452" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="JFUS9Gbx80krWedywdAs-1" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#505050;shape=mxgraph.mscae.intune.device_os" vertex="1" parent="1">
+          <mxGeometry x="124" y="241" width="104" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-3" value="" style="image;html=1;image=img/lib/clip_art/computers/Server_Rack_Empty_128x128.png" vertex="1" parent="1">
+          <mxGeometry x="614" y="248" width="109.43" height="112" as="geometry" />
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-5" value="" style="image;html=1;image=img/lib/clip_art/computers/Database_128x128.png" vertex="1" parent="1">
+          <mxGeometry x="614" y="483" width="106" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-6" value="&lt;b&gt;Client&lt;br&gt;(Streamlit)&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="54" y="278" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-7" value="Server&lt;br&gt;(Flask)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="718" y="276" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-8" value="Local Storage" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="721.72" y="511" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-9" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="233" y="267" as="sourcePoint" />
+            <mxPoint x="611" y="267" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-10" value="&lt;span&gt;1. Create experiment&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="342" y="241" width="122" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-12" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="235" y="301" as="sourcePoint" />
+            <mxPoint x="614" y="299" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-13" value="&lt;span&gt;3. Start experiment&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="342" y="276" width="122" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-15" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=0.429;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="JFUS9Gbx80krWedywdAs-3" target="JFUS9Gbx80krWedywdAs-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="455" y="221" as="sourcePoint" />
+            <mxPoint x="715" y="200" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="644" y="213" />
+              <mxPoint x="681" y="190" />
+              <mxPoint x="721" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-16" value="&lt;span&gt;4. Run experiment&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="620" y="164" width="122" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-17" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="JFUS9Gbx80krWedywdAs-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="235" y="334" as="sourcePoint" />
+            <mxPoint x="236" y="332" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-18" value="&lt;span&gt;5. Log back progress/result&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="325.5" y="308" width="155" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-19" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="649" y="360" as="sourcePoint" />
+            <mxPoint x="648.9999999999998" y="482" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-22" value="&lt;span&gt;2. Save experiment configs&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=0;rotation=-90;" vertex="1" parent="1">
+          <mxGeometry x="565" y="402" width="122" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-24" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="686" y="361" as="sourcePoint" />
+            <mxPoint x="685.9999999999998" y="483" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JFUS9Gbx80krWedywdAs-26" value="&lt;span&gt;6. Save results&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=0;rotation=-90;" vertex="1" parent="1">
+          <mxGeometry x="623" y="399" width="155" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
