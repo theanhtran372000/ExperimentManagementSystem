@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "98f27d3d-de34-4593-9b8e-0687988e425d",
+		"name": "Experiment Management System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29200255"
+	},
+	"item": [
+		{
+			"name": "Experiment",
+			"item": [
+				{
+					"name": "Experiment List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/exp/list",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"exp",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Experiment Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"model\": {\r\n        \"layers\": [\r\n            {\r\n                \"name\": \"flatten\"\r\n            },\r\n            {\r\n                \"name\": \"linear\",\r\n                \"in_shape\": 784,\r\n                \"out_shape\": 128\r\n            },\r\n            {\r\n                \"name\": \"relu\"\r\n            },\r\n            {\r\n                \"name\": \"linear\",\r\n                \"in_shape\": 128,\r\n                \"out_shape\": 10\r\n            },\r\n            {\r\n                \"name\": \"log_softmax\"\r\n            }\r\n        ]\r\n    },\r\n    \"train\": {\r\n        \"lr\": 0.01,\r\n        \"batch_size\": 64,\r\n        \"num_epochs\": 2,\r\n        \"loss\": \"cross_entropy\",\r\n        \"optim\": \"adam\"\r\n    },\r\n    \"data\": {\r\n        \"transforms\": [\r\n            {\r\n                \"name\": \"to_tensor\"\r\n            }\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/exp/create",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"exp",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Experiment Start",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"q0k5ozji3ro0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/exp/start",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"exp",
+								"start"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Experiment Info",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"pe4vi9nhr4fn\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/exp/info",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"exp",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Experiment Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"q0k5ozji3ro0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/exp/delete",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"exp",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "127.0.0.1",
+			"type": "string"
+		},
+		{
+			"key": "port",
+			"value": "3720",
+			"type": "string"
+		}
+	]
+}
