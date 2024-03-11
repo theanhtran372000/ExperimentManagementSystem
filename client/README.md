@@ -1,5 +1,5 @@
-# Server
-Server side was built with **Flask** and **Pytorch**.
+# Client
+Client side was built with **Streamlit**.
 
 ## 1. Configuration
 *1. Create environment*
