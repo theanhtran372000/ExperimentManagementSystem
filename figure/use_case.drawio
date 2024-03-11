@@ -1,0 +1,99 @@
+<mxfile host="Electron" modified="2024-03-11T08:36:23.604Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="5i59TLj2CjJDVJmYCJzX" version="23.1.5" type="device">
+  <diagram name="Trang-1" id="0VeEiE6ZafosVPe14HBs">
+    <mxGraphModel dx="1290" dy="655" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFF99;" parent="1" vertex="1">
+          <mxGeometry x="210" y="120" width="490" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-2" value="&lt;b&gt;Experiment Management System&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="355" y="120" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-3" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#9999FF;" parent="1" vertex="1">
+          <mxGeometry x="80" y="280" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-7" value="Create experiment" style="ellipse;whiteSpace=wrap;html=1;fillColor=#D5E8D4;" parent="1" vertex="1">
+          <mxGeometry x="280" y="170" width="126" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-8" value="Start experiment" style="ellipse;whiteSpace=wrap;html=1;fillColor=#D5E8D4;" parent="1" vertex="1">
+          <mxGeometry x="280" y="260" width="126" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-19" value="Tune params" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFCCE6;" parent="1" vertex="1">
+          <mxGeometry x="520" y="170" width="126" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-20" value="List/Sort experiment" style="ellipse;whiteSpace=wrap;html=1;fillColor=#D5E8D4;" parent="1" vertex="1">
+          <mxGeometry x="280" y="340" width="126" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-23" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="PIG3mWQLIVwdxnTy2lnJ-3" target="PIG3mWQLIVwdxnTy2lnJ-7" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="420" as="sourcePoint" />
+            <mxPoint x="530" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-24" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="PIG3mWQLIVwdxnTy2lnJ-3" target="PIG3mWQLIVwdxnTy2lnJ-8" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="120" y="384" as="sourcePoint" />
+            <mxPoint x="290" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-28" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="PIG3mWQLIVwdxnTy2lnJ-3" target="PIG3mWQLIVwdxnTy2lnJ-20" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="120" y="415" as="sourcePoint" />
+            <mxPoint x="290" y="585" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-37" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry x="-0.0534" y="10" width="160" relative="1" as="geometry">
+            <mxPoint x="406" y="189.5" as="sourcePoint" />
+            <mxPoint x="520" y="190" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-38" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="PIG3mWQLIVwdxnTy2lnJ-8" target="PIG3mWQLIVwdxnTy2lnJ-7" edge="1">
+          <mxGeometry y="-37" width="160" relative="1" as="geometry">
+            <mxPoint x="416" y="270" as="sourcePoint" />
+            <mxPoint x="530" y="270.5" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-41" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="PIG3mWQLIVwdxnTy2lnJ-11" edge="1">
+          <mxGeometry x="0.0526" y="-10" width="160" relative="1" as="geometry">
+            <mxPoint x="352.41" y="380" as="sourcePoint" />
+            <mxPoint x="406" y="390" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-45" value="View detail" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFCCE6;" parent="1" vertex="1">
+          <mxGeometry x="520" y="340" width="126" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-46" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="PIG3mWQLIVwdxnTy2lnJ-45" target="PIG3mWQLIVwdxnTy2lnJ-20" edge="1">
+          <mxGeometry x="0.0526" y="-10" width="160" relative="1" as="geometry">
+            <mxPoint x="530" y="400" as="sourcePoint" />
+            <mxPoint x="416" y="400" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-47" value="Check duplicate" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFCCE6;" parent="1" vertex="1">
+          <mxGeometry x="520" y="260" width="126" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PIG3mWQLIVwdxnTy2lnJ-48" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" parent="1" source="PIG3mWQLIVwdxnTy2lnJ-7" target="PIG3mWQLIVwdxnTy2lnJ-47" edge="1">
+          <mxGeometry x="0.2374" y="20" width="160" relative="1" as="geometry">
+            <mxPoint x="416" y="199.5" as="sourcePoint" />
+            <mxPoint x="530" y="200" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Zxb1euyroDthgRSTpCv3-2" value="Statistics" style="ellipse;whiteSpace=wrap;html=1;fillColor=#D5E8D4;" vertex="1" parent="1">
+          <mxGeometry x="280" y="410" width="126" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Zxb1euyroDthgRSTpCv3-3" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="PIG3mWQLIVwdxnTy2lnJ-3" target="Zxb1euyroDthgRSTpCv3-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="120" y="398" as="sourcePoint" />
+            <mxPoint x="290" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
