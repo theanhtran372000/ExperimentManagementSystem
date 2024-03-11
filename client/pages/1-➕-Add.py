@@ -17,7 +17,7 @@ sender = RequestSender(configs)
 st.set_page_config(layout="wide")
 
 # Main page
-st.header('Add new experiment here.')
+st.header('➕ Add new experiment here.')
 st.info('In this page, you can customize your own experiment. Customization includes **model structure** and **training parameters**.', icon='ℹ️')
 st.markdown('---')
 
@@ -26,6 +26,14 @@ st.markdown('''
     <style>
         button[data-testid="baseButton-secondary"] {
             width: 100%;
+            background-color: #dbe6f4;
+            border: none;
+            transition: .3s all;
+        }
+        
+        button[data-testid="baseButton-secondary"]:hover {
+            border: 2px solid #004280;
+            color: #004280;
         }
         
         div[data-testid="column"]:first-child {
@@ -41,7 +49,7 @@ st.markdown('''
 cols = st.columns([3, 2])
 
 ### MODEL STRUCTURE ###
-cols[0].subheader('Model structure')
+cols[0].subheader('🧬 Model structure')
 
 if 'layers' not in st.session_state or len(st.session_state['layers']) == 0:
     cols[0].info('Click button below to add a new layer.', icon='ℹ️')
@@ -179,7 +187,7 @@ if reset_button:
         st.rerun()
 
 ### TRAINING PARAMS ###
-cols[1].subheader('Training Params')
+cols[1].subheader('🏃 Training Params')
 if 'train' not in st.session_state:
     st.session_state['train'] = {}
 
@@ -235,7 +243,7 @@ st.session_state['train']['optim'] = optim
 
 ### DATA AUGMENTATION ###
 cols[1].markdown('---')
-cols[1].subheader('Data Augmentation')
+cols[1].subheader('📊 Data Augmentation')
 
 if 'transforms' not in st.session_state:
     st.session_state['transforms'] = []
@@ -255,6 +263,7 @@ for transform in transforms:
 st.session_state['transforms'] = processed_transforms
 
 st.sidebar.header('Control Panel')
+
 
 id_display = st.sidebar.markdown('Current id: **none**')
 annouce = st.sidebar.info('Here is some announcements.', icon='ℹ️')

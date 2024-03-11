@@ -30,6 +30,10 @@ def experiment_sort(classified_exps, criterion='accuracy', train=True, reverse=T
     
     if len(done_exps) == 0:
         return None
+    
+    if criterion == 'duration':
+            return sorted(done_exps, key=lambda item: item['run']['dur'], reverse=reverse)
+    
     if train:
         if criterion == 'accuracy':
             return sorted(done_exps, key=lambda item: item['result']['train']['accuracy'], reverse=reverse)
@@ -37,8 +41,6 @@ def experiment_sort(classified_exps, criterion='accuracy', train=True, reverse=T
             return sorted(done_exps, key=lambda item: item['result']['train']['precision']['macro'], reverse=reverse)
         elif criterion == 'recall':
             return sorted(done_exps, key=lambda item: item['result']['train']['recall']['macro'], reverse=reverse)
-        elif criterion == 'duration':
-            return sorted(done_exps, key=lambda item: item['run']['dur'], reverse=reverse)
         else:
             return None
     else:
@@ -48,7 +50,5 @@ def experiment_sort(classified_exps, criterion='accuracy', train=True, reverse=T
             return sorted(done_exps, key=lambda item: item['result']['valid']['precision']['macro'], reverse=reverse)
         elif criterion == 'recall':
             return sorted(done_exps, key=lambda item: item['result']['valid']['recall']['macro'], reverse=reverse)
-        elif criterion == 'duration':
-            return sorted(done_exps, key=lambda item: item['run']['dur'], reverse=reverse)
         else:
             return None

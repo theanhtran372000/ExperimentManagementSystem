@@ -52,7 +52,7 @@ st.markdown('''<style>
 </style>''', unsafe_allow_html=True)
 
 # Main page
-st.header('Welcome to Experiment Management System!')
+st.header('🏠 Welcome to Experiment Management System!')
 st.caption('By The Anh Tran')
 
 # Fetch data from server
@@ -66,7 +66,7 @@ else:
     st.success('Fetched data from server successfully!', icon="✅")
     exp_list = response['data']
     
-    st.subheader('Here are some statistics.')
+    st.subheader('📈 Here are some statistics.')
     st.markdown('---')
     
     # Display data
