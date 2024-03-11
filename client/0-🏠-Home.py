@@ -86,11 +86,11 @@ else:
     )
     cols[0].metric(
         label="Best Accuracy", 
-        value='--' if exp_sorted_by_accuracy is None \
+        value='--' if len(exp_sorted_by_accuracy) == 0 \
             else "{:.2f}%".format(
                 exp_sorted_by_accuracy[0]['result']['train']['accuracy'] * 100
             ), 
-        delta='--' if exp_sorted_by_accuracy is None else exp_sorted_by_accuracy[0]['id']
+        delta='--' if len(exp_sorted_by_accuracy) == 0 else exp_sorted_by_accuracy[0]['id']
     )
     
     exp_sorted_by_precision = experiment_sort(
@@ -101,11 +101,11 @@ else:
     )
     cols[1].metric(
         label="Best Precision", 
-        value='--' if exp_sorted_by_precision is None \
+        value='--' if len(exp_sorted_by_precision) == 0 \
             else "{:.2f}%".format(
                 exp_sorted_by_precision[0]['result']['train']['precision']['macro'] * 100
             ), 
-        delta='--' if exp_sorted_by_precision is None else exp_sorted_by_precision[0]['id']
+        delta='--' if len(exp_sorted_by_precision) == 0 else exp_sorted_by_precision[0]['id']
     )
     
     exp_sorted_by_recall = experiment_sort(
@@ -116,11 +116,11 @@ else:
     )
     cols[2].metric(
         label="Best Recall", 
-        value='--' if exp_sorted_by_recall is None \
+        value='--' if len(exp_sorted_by_recall) == 0 \
             else "{:.2f}%".format(
                 exp_sorted_by_recall[0]['result']['train']['recall']['macro'] * 100
             ), 
-        delta='--' if exp_sorted_by_recall is None else exp_sorted_by_recall[0]['id']
+        delta='--' if len(exp_sorted_by_recall) == 0 else exp_sorted_by_recall[0]['id']
     )
     
     exp_sorted_by_duration = experiment_sort(
@@ -130,9 +130,9 @@ else:
     )
     cols[3].metric(
         label="Fastest", 
-        value='--' if exp_sorted_by_duration is None \
+        value='--' if len(exp_sorted_by_duration) == 0 \
             else "{:.2f}s".format(
                 exp_sorted_by_duration[0]['run']['dur']
             ), 
-        delta='--' if exp_sorted_by_duration is None else exp_sorted_by_duration[0]['id']
+        delta='--' if len(exp_sorted_by_duration) == 0 else exp_sorted_by_duration[0]['id']
     )
